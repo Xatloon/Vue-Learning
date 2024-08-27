@@ -14,11 +14,11 @@ export default defineConfig(({ mode }) => {
       Vue(),
       AutoImport({
         resolvers: [ElementPlusResolver()],
-        dts: 'app/auto-imports.d.ts',
+        dts: 'app/modules/auto-imports.d.ts',
       }),
       Components({
         resolvers: [ElementPlusResolver()],
-        dts: 'app/components.d.ts',
+        dts: 'app/modules/components.d.ts',
       }),
     ],
     resolve: {

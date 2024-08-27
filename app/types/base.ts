@@ -1,6 +1,8 @@
-export interface ResponseData<T> {
-  count: number
-  code: number
+import type { components } from '@/types'
+
+type ResponseReult = ApiSchemas['ResultData']
+
+export type ApiSchemas = components['schemas']
+export interface ResponseData<T> extends ResponseReult {
   data: T
-  message: string
 }

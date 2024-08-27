@@ -7,9 +7,9 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig(({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  const env = loadEnv(mode, process.cwd())
   return {
-    base: process.env.PUBLIC_URL ?? '/',
+    base: env.PUBLIC_URL ?? '/',
     plugins: [
       Vue(),
       AutoImport({
@@ -31,8 +31,8 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
-        '/api': {
-          target: 'http://demobox-catalog.siaoya.com',
+        [env.VITE_API_PREFIX]: {
+          target: env.VITE_API_URL,
           changeOrigin: true,
         },
       },

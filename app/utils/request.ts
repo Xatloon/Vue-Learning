@@ -73,19 +73,18 @@ RestRequest.interceptors.request.use(
   },
 )
 
-export async function fetcher<T, U>([url, params]: [url: string, params?: U]): Promise<T> {
-  return await reqGet<T, U>(url, params)
-}
-
-export async function reqGet<T = unknown, U = unknown>(url: string, params?: U): Promise<T> {
+export async function reqGet<T = unknown, U = unknown>(
+  url: string,
+  params?: U,
+): Promise<T> {
   const res = await RestRequest.get<ResponseData<T>>(apiUrl(url), { params })
   return res.data.data
 }
 
 export async function reqPost<T = unknown, U = unknown>(
   url: string,
-  { arg }: { arg: U },
+  params?: U,
 ): Promise<T> {
-  const res = await RestRequest.post<ResponseData<T>>(apiUrl(url), arg)
+  const res = await RestRequest.post<ResponseData<T>>(apiUrl(url), { params })
   return res.data.data
 }

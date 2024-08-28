@@ -19,6 +19,7 @@
   "dependencies": {
     "@tanstack/vue-query": "^5.52.2",
     "axios": "^1.7.5",
+    "date-fns": "^3.6.0",
     "element-plus": "^2.8.1",
     "vite": "^5.4.2",
     "vue": "^3.4.38",
@@ -33,6 +34,7 @@
     "lefthook": "^1.7.14",
     "openapi-typescript": "^7.3.0",
     "typescript": "^5.5.4",
+    "unocss": "^0.62.3",
     "unplugin-auto-import": "^0.18.2",
     "unplugin-vue-components": "^0.27.4",
     "vue-tsc": "^2.0.29"

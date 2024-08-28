@@ -3,7 +3,12 @@ import { zhCn } from 'element-plus/es/locales'
 </script>
 
 <template>
-  <ElConfigProvider :local="zhCn">
+  <ElConfigProvider
+    :locale="zhCn"
+    :button="{
+      autoInsertSpace: false,
+    }"
+  >
     <RouterView />
   </ElConfigProvider>
 </template>

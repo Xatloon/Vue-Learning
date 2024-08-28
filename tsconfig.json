@@ -1,41 +1,18 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "composite": true,
     "target": "ESNext",
-    "jsx": "preserve",
-    "jsxImportSource": "vue",
-    "lib": ["ESNext", "DOM"],
-    "moduleDetection": "force",
+    "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "node",
     "paths": {
       "@/*": ["app/*"]
     },
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": false,
-    "allowJs": true,
     "strict": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "downlevelIteration": true,
-    "noEmit": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
-  "include": ["app/**/*"],
   "exclude": ["node_modules", "build"]
 }

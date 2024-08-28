@@ -13,6 +13,7 @@ const RestRequest: AxiosInstance = axios.create({
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`,
   },
   withCredentials: true,
 })

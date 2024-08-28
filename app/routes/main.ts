@@ -3,23 +3,18 @@ import { type RouteRecordRaw, createMemoryHistory, createRouter } from 'vue-rout
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/config',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
   },
   {
-    path: '/app',
-    component: () => import(/* webpackChunkName: "dashboard" */ '@/pages/app/App.vue'),
+    path: '/edit',
+    name: 'create',
+    component: () => import(/* webpackChunkName: "edit" */ '@/pages/Edit.vue'),
   },
   {
-    path: '/config',
-    component: () => import(/* webpackChunkName: "config" */ '@/pages/config/Config.vue'),
-  },
-  {
-    path: '/instance',
-    component: () => import(/* webpackChunkName: "instance" */ '@/pages/instance/Instance.vue'),
-  },
-  {
-    path: '/staff',
-    component: () => import(/* webpackChunkName: "staff" */ '@/pages/staff/Staff.vue'),
+    path: '/edit/:id',
+    name: 'update',
+    component: () => import(/* webpackChunkName: "edit" */ '@/pages/Edit.vue'),
   },
 ]
 

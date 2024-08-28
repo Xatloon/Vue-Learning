@@ -1,6 +1,7 @@
 import process from 'node:process'
 import path from 'node:path'
 import Vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
 import { defineConfig, loadEnv } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -13,6 +14,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       Vue(),
       AutoImport({
+        imports: ['vue'],
         resolvers: [ElementPlusResolver()],
         dts: 'app/modules/auto-imports.d.ts',
       }),
@@ -20,6 +22,7 @@ export default defineConfig(({ mode }) => {
         resolvers: [ElementPlusResolver()],
         dts: 'app/modules/components.d.ts',
       }),
+      UnoCSS(),
     ],
     resolve: {
       alias: {

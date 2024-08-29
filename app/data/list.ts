@@ -1,29 +1,27 @@
 import { keepPreviousData, useQuery } from '@tanstack/vue-query'
-import type { ApiSchemas, paths } from '@/types'
+import type { ApiSchemas, GetColumnsListParams, GetProjectsListParams } from '@/types'
 import { queryFetcher } from '@/utils'
 
-type GetProjectsListParams = paths['/api/terms/listTerm']['get']['parameters']['query']
 type GetProjectListResult = ApiSchemas['ListTermResult']
 
 export function useProjectsList(params: Ref<GetProjectsListParams> | GetProjectsListParams) {
-  const { data, isLoading } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['/terms/listTerm', params] as const,
-    queryFn: ({ queryKey }) => queryFetcher<GetProjectListResult, GetProjectsListParams>(queryKey),
+    queryFn: async ({ queryKey }) => await queryFetcher<GetProjectListResult, GetProjectsListParams>(queryKey),
     placeholderData: keepPreviousData,
   })
   return {
     data,
-    isLoading,
+    isPending,
   }
 }
 
-type GetColumnsListParams = paths['/api/configs/getColumns']['get']['parameters']['query']
 type GetColumnsListResult = ApiSchemas['GetColumnsResult']
 
 export function useColumnsList(params: Ref<GetColumnsListParams> | GetColumnsListParams = undefined) {
   const { data, isPending } = useQuery({
     queryKey: ['/configs/getColumns', params] as const,
-    queryFn: ({ queryKey }) => queryFetcher<GetColumnsListResult, GetColumnsListParams>(queryKey),
+    queryFn: async ({ queryKey }) => await queryFetcher<GetColumnsListResult, GetColumnsListParams>(queryKey),
     placeholderData: keepPreviousData,
   })
   return {

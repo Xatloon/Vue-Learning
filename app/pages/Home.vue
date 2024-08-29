@@ -2,20 +2,45 @@
 import { useColumnsList, useProjectsList } from '@/data'
 import { ButtonText, TagText } from '@/constants'
 import { formatDate } from '@/utils'
+import type { GetProjectsListParams } from '@/types'
 
-const params = ref({
+const params = reactive<GetProjectsListParams>({
   page: 1,
   size: 10,
+  columnId: undefined,
+  status: undefined,
+  name: undefined,
 })
-const { data, isLoading } = useProjectsList(params)
+const { data, isPending } = useProjectsList(params)
 const { data: columnsData, isPending: isColumnPending } = useColumnsList()
 const statusOptions = [{
   label: TagText.Active,
   value: 'active',
 }, {
   label: TagText.Inactive,
-  value: 'inactive',
+  value: 'ready',
 }]
+
+const filters = reactive({
+  columnId: undefined,
+  status: undefined,
+  name: undefined,
+})
+
+function onChangeHandler() {
+  params.columnId = filters.columnId
+  params.status = filters.status
+  params.name = filters.name
+}
+
+function onResetHandler() {
+  filters.columnId = undefined
+  filters.status = undefined
+  filters.name = undefined
+  params.columnId = undefined
+  params.status = undefined
+  params.name = undefined
+}
 </script>
 
 <template>
@@ -30,9 +55,9 @@ const statusOptions = [{
         <ElButton>{{ ButtonText.DeleteMultiProjects }}</ElButton>
       </div>
       <div class="flex gap-2">
-        <ElForm inline>
+        <ElForm inline :model="filters">
           <ElFormItem label="所属栏目">
-            <ElSelect :loading="isColumnPending" placeholder="所属栏目" style="width: 200px;">
+            <ElSelect v-model="filters.columnId" :loading="isColumnPending" placeholder="所属栏目" style="width: 200px;">
               <ElOption
                 v-for="column in columnsData?.columns"
                 :key="column.id"
@@ -42,7 +67,7 @@ const statusOptions = [{
             </ElSelect>
           </ElFormItem>
           <ElFormItem label="状态">
-            <ElSelect placeholder="选择状态" style="width: 200px;">
+            <ElSelect v-model="filters.status" placeholder="选择状态" style="width: 200px;">
               <ElOption
                 v-for="option in statusOptions"
                 :key="option.value"
@@ -52,13 +77,13 @@ const statusOptions = [{
             </ElSelect>
           </ElFormItem>
           <ElFormItem label="项目名称">
-            <ElInput />
+            <ElInput v-model="filters.name" />
           </ElFormItem>
           <ElFormItem>
-            <ElButton type="primary">
+            <ElButton type="primary" @click="onChangeHandler">
               {{ ButtonText.Find }}
             </ElButton>
-            <ElButton>
+            <ElButton @click="onResetHandler">
               {{ ButtonText.Reset }}
             </ElButton>
           </ElFormItem>
@@ -69,7 +94,7 @@ const statusOptions = [{
       body-class="flex gap-4 flex-col"
     >
       <ElTable
-        v-loading="isLoading"
+        v-loading="isPending"
         :data="data?.terms"
         border
         show-overflow-tooltip
